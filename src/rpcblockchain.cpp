@@ -99,10 +99,7 @@ Value getnetworkhashps(const Array& params, bool fHelp)
         throw runtime_error(
                             "getnetworkhashps\n"
                             "Returns a exponential moving estimate of the current network hashrate (Mhash/s)");
-    Object obj;
-    obj.push_back(Pair("pow_networkhashps", GetPoWMHashPS()));
-    obj.push_back(Pair("pos_networkhashps", GetPoSKernelPS()));
-    return obj;
+    return GetPoWMHashPS();
 }
 
 Object blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool fPrintTransactionDetail)
@@ -164,9 +161,7 @@ Value getbestblockhash(const Array& params, bool fHelp)
             "getbestblockhash\n"
             "Returns the hash of the best block in the longest block chain.");
 
-    Object obj;
-    obj.push_back(Pair("bestblockhash", hashBestChain.GetHex()));
-    return obj;
+    return hashBestChain.GetHex();
 }
 
 Value getblockcount(const Array& params, bool fHelp)
@@ -176,9 +171,7 @@ Value getblockcount(const Array& params, bool fHelp)
             "getblockcount\n"
             "Returns the number of blocks in the longest block chain.");
 
-    Object obj;
-    obj.push_back(Pair("blockcount", nBestHeight));
-    return obj;
+    return nBestHeight;
 }
 
 
@@ -240,9 +233,7 @@ Value getblockhash(const Array& params, bool fHelp)
 
     CBlockIndex* pblockindex = FindBlockByHeight(nHeight);
 
-    Object obj;
-    obj.push_back(Pair("blockhash", pblockindex->phashBlock->GetHex()));
-    return obj;
+    return pblockindex->phashBlock->GetHex();
 }
 
 Value getblock(const Array& params, bool fHelp)
