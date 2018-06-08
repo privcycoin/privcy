@@ -70,6 +70,29 @@ Value getpeerinfo(const Array& params, bool fHelp)
 
     return ret;
 }
+
+ Value getnetworkinfo(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 0)
+        throw runtime_error(
+            "getnetworkinfo\n"
+            "Returns an object containing various state info regarding P2P networking.\n");
+
+    proxyType proxy;
+    GetProxy(NET_IPV4, proxy);
+
+    Object obj;
+    obj.push_back(Pair("version",       (int)CLIENT_VERSION));
+    obj.push_back(Pair("protocolversion",(int)PROTOCOL_VERSION));
+    obj.push_back(Pair("connections",   (int)vNodes.size()));
+    obj.push_back(Pair("proxy",         (proxy.first.IsValid() ? proxy.first.ToStringIPPort() : string())));
+    obj.push_back(Pair("paytxfee",      ValueFromAmount(nTransactionFee)));
+    Array localAddresses;
+    {
+    }
+    obj.push_back(Pair("localaddresses", localAddresses));
+    return obj;
+}
  
 // PRiVCY: send alert.
 // There is a known deadlock situation with ThreadMessageHandler
