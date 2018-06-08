@@ -1135,8 +1135,25 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 {
     boost::filesystem::ifstream streamConfig(GetConfigFile());
     if (!streamConfig.good())
-        return; // No bitcoin.conf file is OK
-
+       {
+		boost::filesystem::path ConfPath;
+        ConfPath = GetDefaultDataDir() / "PRiVCY.conf";
+		FILE* ConfFile = fopen(ConfPath.string().c_str(), "w");
+		fprintf(ConfFile, "testnet=0\n");
+		fprintf(ConfFile, "listen=1\n");
+		fprintf(ConfFile, "server=1\n");
+		fprintf(ConfFile, "//daemon=1\n");
+		fprintf(ConfFile, "maxconnections=300\n");
+		fprintf(ConfFile, "rpcuser=PRiVCYd\n");
+		fprintf(ConfFile, "rpcpassword=YOURPASSWORD\n");
+		fprintf(ConfFile, "rpcport=18780\n");
+		fprintf(ConfFile, "rpcconnect=127.0.0.1\n");
+		fprintf(ConfFile, "port=17770\n");
+		fprintf(ConfFile, "addnode=otwsvate4vvogbrt.onion:17770\n");
+		fprintf(ConfFile, "addnode=nufiijzpo7ac2k6u.onion:17770\n");
+		fclose(ConfFile);
+	}
+	
     set<string> setOptions;
     setOptions.insert("*");
 

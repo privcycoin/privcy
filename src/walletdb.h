@@ -10,7 +10,6 @@
 // Remove if compiling Debian 8
 // #define BOOST_NO_CXX11_SCOPED_ENUMS
 
-
 #include "db.h"
 #include "base58.h"
 #include "stealth.h"
