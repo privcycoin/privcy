@@ -1241,6 +1241,23 @@ Value listaccounts(const Array& params, bool fHelp)
     return ret;
 }
 
+Value deleteaddress(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() > 2)
+        throw runtime_error(
+            "delete <address>\n"
+            "Deletes an address from wallet.dat, please use with caution as removed address cannot be restored.");
+	
+	
+	string strAdd = params[0].get_str();
+	
+	CWalletDB(pwalletMain->strWalletFile).EraseName(strAdd);
+	pwalletMain->TopUpKeyPool();
+	
+	string ret = "Successfully deleted your address, please restart PRiVCY wallet.";
+	return ret;
+}
+
 Value listsinceblock(const Array& params, bool fHelp)
 {
     if (fHelp)
