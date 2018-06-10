@@ -1243,10 +1243,10 @@ Value listaccounts(const Array& params, bool fHelp)
 
 Value deleteaddress(const Array& params, bool fHelp)
 {
-    if (fHelp || params.size() > 2)
+    if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "delete <address>\n"
-            "Deletes an address from wallet.dat, please use with caution as removed address cannot be restored.");
+            "deleteaddress <address>\n"
+            "Deletes address from wallet.dat file, please use with caution as removed address cannot be restored.");
 	
 	
 	string strAdd = params[0].get_str();
