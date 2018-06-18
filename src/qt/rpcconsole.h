@@ -109,6 +109,8 @@ private:
   ClientModel *clientModel;
   QStringList history;
   int historyPtr;
+  const static QStringList historyFilter;
+  QString cmdBeforeBrowsing;
   QCompleter *autoCompleter;
   NodeId cachedNodeid;
   QMenu *peersTableContextMenu;
