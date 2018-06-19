@@ -15,5 +15,5 @@ pushd tor
 ./autogen.sh
 popd
 pushd src/leveldb
-$PATCH -p0 < ../leveldb.patch
+$PATCH -p0 < ../../leveldb.patch
 popd
