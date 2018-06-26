@@ -462,9 +462,9 @@ void RPCConsole::clear(bool clearHistory)
                 "table { }"
                 "td.time { color: #808080; font-size: %1; padding-top: 3px; } "
                 "td.message { font-family: Monospace; font-size: %1; } "
-                "td.cmd-request { color: #ffff99; } "
+                "td.cmd-request { color: #0bbc07; } "
                 "td.cmd-error { color: red; } "
-                "b { color: #ffff99; } "
+                "b { color: #0bbc07; } "
        ).arg( QString("%1pt").arg(consoleFontSize))
     );
 
