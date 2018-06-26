@@ -420,7 +420,7 @@ void BitcoinGUI::createToolBars(QToolBar *toolbar)
 	toolbar->setStyleSheet("QToolBar { border: 2px }");
     toolbar->setOrientation(Qt::Vertical);
     toolbar->setMovable( false );
-    toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    toolbar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     toolbar->addWidget(new QLabel("      "));
     toolbar->addAction(overviewAction);
     toolbar->addAction(sendCoinsAction);
