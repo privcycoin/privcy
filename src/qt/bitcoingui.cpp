@@ -136,7 +136,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
        the whole component it resides on not being paintable
      */
 #ifdef Q_OS_MAC
-    toolbar->setStyleSheet("QToolBar { background-color: transparent; border: 0px solid black; padding: 3px; }");
+//    toolbar->setStyleSheet("QToolBar { background-color: transparent; border: 0px solid black; padding: 3px; }");
 #endif
 
     // Create tabs
@@ -226,13 +226,13 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
         progressBar->setStyleSheet("QProgressBar { background-color: #e8e8e8; border: 1px solid grey; border-radius: 3px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #FF8000, stop: 1 orange); border-radius: 3px; margin: 0px; }");
     }
 
-    progressBar->setStyleSheet("color: white; background-color: #1b202f; border-color: #313c62;");
-    progressBarLabel->setStyleSheet("color: white; background-color: #1b202f; border-color: #313c62;");
+    progressBar->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
+    progressBarLabel->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
 
     statusBar()->addWidget(progressBarLabel);
     statusBar()->addWidget(progressBar);
     statusBar()->addPermanentWidget(frameBlocks);
-    statusBar()->setStyleSheet("color: white; background-color: #1b202f; border-color: #313c62;");
+    statusBar()->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
 
     syncIconMovie = new QMovie(":/movies/update_spinner", "mng", this);
 
@@ -406,7 +406,7 @@ void BitcoinGUI::createMenuBar()
     settings->addSeparator();
     settings->addAction(openConfEditorAction);   
     settings->addAction(optionsAction);
-
+	
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);
     help->addSeparator();
@@ -430,6 +430,7 @@ void BitcoinGUI::createToolBars(QToolBar *toolbar)
     toolbar->addAction(unlockWalletAction);
     toolbar->addAction(lockWalletAction);
     toolbar->addAction(exportAction);
+	
 }
 
 void BitcoinGUI::setClientModel(ClientModel *clientModel)
