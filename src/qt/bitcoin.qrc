@@ -48,6 +48,14 @@
         <file alias="tor_inactive">res/icons/tor2.png</file>
         <file alias="fontbigger">res/icons/fontbigger.png</file>
         <file alias="fontsmaller">res/icons/fontsmaller.png</file>
+        <file alias="downArrow">res/icons/downArrow_dark.png</file>
+        <file alias="downArrow_small">res/icons/downArrow_small_dark.png</file>
+        <file alias="downArrow_small_white">res/icons/downArrow_small.png</file>
+        <file alias="upArrow_small">res/icons/upArrow_small_dark.png</file>
+        <file alias="upArrow_small_white">res/icons/upArrow_small.png</file>
+        <file alias="leftArrow_small">res/icons/leftArrow_small_dark.png</file>
+        <file alias="rightArrow_small">res/icons/rightArrow_small_dark.png</file>
+        <file alias="qtreeview_selected">res/icons/qtreeview_selected.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="about_new">res/images/about.png</file>
