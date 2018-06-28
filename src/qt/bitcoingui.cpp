@@ -253,7 +253,14 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
     connect(addressBookPage, SIGNAL(verifyMessage(QString)), this, SLOT(gotoVerifyMessageTab(QString)));
     // Clicking on "Sign Message" in the receive coins page sends you to the sign message tab
     connect(receiveCoinsPage, SIGNAL(signMessage(QString)), this, SLOT(gotoSignMessageTab(QString)));
+	// Links
+	connect(openWebsite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
+    connect(openWebsite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
+    connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
+	// Exchange
+	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
 
+    
     gotoOverviewPage();
 }
 
@@ -372,6 +379,13 @@ void BitcoinGUI::createActions()
     connect(signMessageAction, SIGNAL(triggered()), this, SLOT(gotoSignMessageTab()));
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
     
+    openWebsite1 = new QAction(QIcon(":/icons/discord"), tr("&Discord"), this);
+    openWebsite2 = new QAction(QIcon(":/icons/Bitcointalk"), tr("&Bitcointalk"), this);
+    openWebsite3 = new QAction(QIcon(":/icons/GitHub"), tr("&Github"), this);
+
+
+	Exchangesite1 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
+    
 }
 
 void BitcoinGUI::changeStyleSheet()
@@ -407,6 +421,16 @@ void BitcoinGUI::createMenuBar()
     settings->addAction(openConfEditorAction);   
     settings->addAction(optionsAction);
 	
+	QMenu* hyperlinks = appMenuBar->addMenu(tr("&Links"));
+    hyperlinks->addAction(openWebsite1);
+    hyperlinks->addAction(openWebsite2);
+    hyperlinks->addAction(openWebsite3);
+
+
+    QMenu *hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
+    hyperlinks2->addAction(Exchangesite1);
+
+        
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);
     help->addSeparator();
@@ -541,6 +565,12 @@ void BitcoinGUI::createTrayIcon()
     trayIconMenu = dockIconHandler->dockMenu();
 #endif
 
+	trayIconMenu->addAction(openWebsite1);
+    trayIconMenu->addAction(openWebsite2);
+	trayIconMenu->addAction(openWebsite3);
+   
+    trayIconMenu->addAction(Exchangesite1);
+    
     // Configuration of the tray icon (or dock icon) icon menu
     trayIconMenu->addAction(toggleHideAction);
     trayIconMenu->addSeparator();

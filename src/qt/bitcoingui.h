@@ -105,6 +105,12 @@ private:
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
     QAction *setStyleSheetAction;
+    
+    QAction* openWebsite1;
+    QAction* openWebsite2;
+    QAction* openWebsite3;
+    
+    QAction* Exchangesite1;
 
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;

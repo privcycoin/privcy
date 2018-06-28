@@ -110,6 +110,11 @@ void openDebugLogfile();
 // Open PRiVCY.conf
 void openConfigfile();
 
+void hyperlinks_slot1();
+void hyperlinks_slot2();
+void hyperlinks_slot3();
+
+void hyperlinks2_slot1();
 
 /** Qt event filter that intercepts ToolTipChange events, and replaces the tooltip with a rich text
       representation if needed. This assures that Qt can word-wrap long tooltip messages.
