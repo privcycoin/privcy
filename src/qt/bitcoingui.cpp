@@ -422,8 +422,8 @@ void BitcoinGUI::createMenuBar()
     settings->addAction(optionsAction);
 	
 	QMenu* hyperlinks = appMenuBar->addMenu(tr("&Links"));
-    hyperlinks->addAction(openWebsite1);
     hyperlinks->addAction(openWebsite2);
+    hyperlinks->addAction(openWebsite1);
     hyperlinks->addAction(openWebsite3);
 
 
