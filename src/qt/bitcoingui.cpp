@@ -443,6 +443,7 @@ void BitcoinGUI::createToolBars(QToolBar *toolbar)
 	addToolBar(Qt::LeftToolBarArea,toolbar);
 	toolbar->setStyleSheet("QToolBar { border: 2px }");
     toolbar->setOrientation(Qt::Vertical);
+    toolbar->setIconSize(QSize(45,45));
     toolbar->setMovable( false );
     toolbar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     toolbar->addWidget(new QLabel("      "));
