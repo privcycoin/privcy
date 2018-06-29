@@ -60,8 +60,8 @@ min-height:2.5em;
 padding: 0em 0em;
 font-size: 11px;
 color:#aaa;
-width: 110px;
-height: 45px;
+width: 95px;
+height: 75px;
 }
  
 QToolBar > QToolButton:checked {
