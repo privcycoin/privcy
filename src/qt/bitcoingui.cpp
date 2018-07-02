@@ -346,7 +346,7 @@ void BitcoinGUI::createActions()
     optionsAction->setToolTip(tr("Modify configuration options for PRiVCY"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
     toggleHideAction = new QAction(QIcon(":/icons/bitcoin"), tr("&Show / Hide"), this);
-    encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Encrypt Wallet"), this);
+    encryptWalletAction = new QAction(QIcon(":/icons/lock_open"), tr("&Encrypt Wallet"), this);
     encryptWalletAction->setToolTip(tr("Encrypt or decrypt wallet"));
     encryptWalletAction->setCheckable(true);
     openConfEditorAction = new QAction(QIcon(":/icons/edit"), tr("Open conf &file"), this);
@@ -355,14 +355,14 @@ void BitcoinGUI::createActions()
     backupWalletAction->setToolTip(tr("Backup wallet to another location"));
     changePassphraseAction = new QAction(QIcon(":/icons/key"), tr("&Change Passphrase"), this);
     changePassphraseAction->setToolTip(tr("Change the passphrase used for wallet encryption"));
-    unlockWalletAction = new QAction(QIcon(":/icons/encrypt"), tr("&Unlock Wallet"), this);
+    unlockWalletAction = new QAction(QIcon(":/icons/lock_open"), tr("&Unlock Wallet"), this);
     unlockWalletAction->setToolTip(tr("Unlock wallet"));
-    lockWalletAction = new QAction(QIcon(":/icons/encrypt"), tr("&Lock Wallet"), this);
+    lockWalletAction = new QAction(QIcon(":/icons/lock_open"), tr("&Lock Wallet"), this);
     lockWalletAction->setToolTip(tr("Lock wallet"));
     signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message"), this);
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message"), this);
 
-    exportAction = new QAction(QIcon(":/icons/export"), tr("&Export"), this);
+    exportAction = new QAction(QIcon(":/icons/editpaste"), tr("&Export"), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
