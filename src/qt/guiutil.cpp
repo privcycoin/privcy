@@ -383,6 +383,13 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
     return QObject::eventFilter(obj, evt);
 }
 
+void hyperlinks_slot1(){QString link= "https://discord.gg/yxWBGEX";QDesktopServices::openUrl(QUrl(link));}
+void hyperlinks_slot2(){QString link= "https://bitcointalk.org/index.php?topic=4503790.0";QDesktopServices::openUrl(QUrl(link));}
+void hyperlinks_slot3(){QString link= "https://github.com/privcycoin/privcy";QDesktopServices::openUrl(QUrl(link));}
+//Exchanges
+void hyperlinks2_slot1(){QString link= "https://crex24.com/exchange/PRiV-BTC";QDesktopServices::openUrl(QUrl(link));}
+
+
 #ifdef WIN32
 boost::filesystem::path static StartupShortcutPath()
 {

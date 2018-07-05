@@ -77,6 +77,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
                                           clientModel(0),
                                           walletModel(0),
                                           messageModel(0),
+                                          quitAction(0),
                                           encryptWalletAction(0),
                                           changePassphraseAction(0),
                                           unlockWalletAction(0),
@@ -91,13 +92,13 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
 
 #ifdef Q_OS_MAC
     resize(960, 610);
-    setWindowTitle(tr("PRiVCY - Mac"));
+    setWindowTitle(tr("PRiVCY - Own Your Privacy"));
 #elif _WIN32
     resize(890, 600);
-    setWindowTitle(tr("PRiVCY - Windows"));
+    setWindowTitle(tr("PRiVCY - Own Your Privacy"));
 #else
     resize(1020, 650);
-    setWindowTitle(tr("PRiVCY - Linux"));
+    setWindowTitle(tr("PRiVCY - Own Your Privacy"));
 #endif
 
 #ifndef Q_OS_MAC
@@ -136,7 +137,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
        the whole component it resides on not being paintable
      */
 #ifdef Q_OS_MAC
-    toolbar->setStyleSheet("QToolBar { background-color: transparent; border: 0px solid black; padding: 3px; }");
+//    toolbar->setStyleSheet("QToolBar { background-color: transparent; border: 0px solid black; padding: 3px; }");
 #endif
 
     // Create tabs
@@ -176,7 +177,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
     frameBlocks->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
     QHBoxLayout *frameBlocksLayout = new QHBoxLayout(frameBlocks);
     frameBlocksLayout->setContentsMargins(3, 0, 3, 0);
-    frameBlocksLayout->setSpacing(3);
+    frameBlocksLayout->setSpacing(5);
     labelEncryptionIcon = new QLabel();
     labelStakingIcon = new QLabel();
     labelConnectionsIcon = new QLabel();
@@ -226,13 +227,13 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
         progressBar->setStyleSheet("QProgressBar { background-color: #e8e8e8; border: 1px solid grey; border-radius: 3px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #FF8000, stop: 1 orange); border-radius: 3px; margin: 0px; }");
     }
 
-    progressBar->setStyleSheet("color: white; background-color: #1b202f; border-color: #313c62;");
-    progressBarLabel->setStyleSheet("color: white; background-color: #1b202f; border-color: #313c62;");
+    progressBar->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
+    progressBarLabel->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
 
     statusBar()->addWidget(progressBarLabel);
     statusBar()->addWidget(progressBar);
     statusBar()->addPermanentWidget(frameBlocks);
-    statusBar()->setStyleSheet("color: white; background-color: #1b202f; border-color: #313c62;");
+    statusBar()->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
 
     syncIconMovie = new QMovie(":/movies/update_spinner", "mng", this);
 
@@ -253,7 +254,14 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
     connect(addressBookPage, SIGNAL(verifyMessage(QString)), this, SLOT(gotoVerifyMessageTab(QString)));
     // Clicking on "Sign Message" in the receive coins page sends you to the sign message tab
     connect(receiveCoinsPage, SIGNAL(signMessage(QString)), this, SLOT(gotoSignMessageTab(QString)));
+	// Links
+	connect(openWebsite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
+    connect(openWebsite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
+    connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
+	// Exchange
+	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
 
+    
     gotoOverviewPage();
 }
 
@@ -334,27 +342,27 @@ void BitcoinGUI::createActions()
 #endif
     aboutQtAction->setToolTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
-    optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
+    optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options"), this);
     optionsAction->setToolTip(tr("Modify configuration options for PRiVCY"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
     toggleHideAction = new QAction(QIcon(":/icons/bitcoin"), tr("&Show / Hide"), this);
-    encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Encrypt Wallet..."), this);
+    encryptWalletAction = new QAction(QIcon(":/icons/lock_open"), tr("&Encrypt Wallet"), this);
     encryptWalletAction->setToolTip(tr("Encrypt or decrypt wallet"));
     encryptWalletAction->setCheckable(true);
-    openConfEditorAction = new QAction(QIcon(":/icons/edit"), tr("Open configuration &file..."), this);
+    openConfEditorAction = new QAction(QIcon(":/icons/edit"), tr("Open conf &file"), this);
     openConfEditorAction->setToolTip(tr("Open the configuration file PRiVCY.conf"));
-    backupWalletAction = new QAction(QIcon(":/icons/filesave"), tr("&Backup Wallet..."), this);
+    backupWalletAction = new QAction(QIcon(":/icons/filesave"), tr("&Backup Wallet"), this);
     backupWalletAction->setToolTip(tr("Backup wallet to another location"));
-    changePassphraseAction = new QAction(QIcon(":/icons/key"), tr("&Change Passphrase..."), this);
+    changePassphraseAction = new QAction(QIcon(":/icons/key"), tr("&Change Passphrase"), this);
     changePassphraseAction->setToolTip(tr("Change the passphrase used for wallet encryption"));
-    unlockWalletAction = new QAction(QIcon(":/icons/lock_open"), tr("&Unlock Wallet..."), this);
+    unlockWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Unlock Wallet"), this);
     unlockWalletAction->setToolTip(tr("Unlock wallet"));
-    lockWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Lock Wallet"), this);
+    lockWalletAction = new QAction(QIcon(":/icons/lock_open"), tr("&Lock Wallet"), this);
     lockWalletAction->setToolTip(tr("Lock wallet"));
-    signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message..."), this);
-    verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
+    signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message"), this);
+    verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message"), this);
 
-    exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
+    exportAction = new QAction(QIcon(":/icons/editpaste"), tr("&Export"), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
@@ -371,6 +379,13 @@ void BitcoinGUI::createActions()
     connect(lockWalletAction, SIGNAL(triggered()), this, SLOT(lockWallet()));
     connect(signMessageAction, SIGNAL(triggered()), this, SLOT(gotoSignMessageTab()));
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
+    
+    openWebsite1 = new QAction(QIcon(":/icons/discord"), tr("&Discord"), this);
+    openWebsite2 = new QAction(QIcon(":/icons/Bitcointalk"), tr("&Bitcointalk"), this);
+    openWebsite3 = new QAction(QIcon(":/icons/GitHub"), tr("&Github"), this);
+
+
+	Exchangesite1 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
     
 }
 
@@ -406,7 +421,17 @@ void BitcoinGUI::createMenuBar()
     settings->addSeparator();
     settings->addAction(openConfEditorAction);   
     settings->addAction(optionsAction);
+	
+	QMenu* hyperlinks = appMenuBar->addMenu(tr("&Links"));
+    hyperlinks->addAction(openWebsite2);
+    hyperlinks->addAction(openWebsite1);
+    hyperlinks->addAction(openWebsite3);
 
+
+    QMenu *hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
+    hyperlinks2->addAction(Exchangesite1);
+
+        
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);
     help->addSeparator();
@@ -419,6 +444,7 @@ void BitcoinGUI::createToolBars(QToolBar *toolbar)
 	addToolBar(Qt::LeftToolBarArea,toolbar);
 	toolbar->setStyleSheet("QToolBar { border: 2px }");
     toolbar->setOrientation(Qt::Vertical);
+    toolbar->setIconSize(QSize(45,45));
     toolbar->setMovable( false );
     toolbar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     toolbar->addWidget(new QLabel("      "));
@@ -430,6 +456,7 @@ void BitcoinGUI::createToolBars(QToolBar *toolbar)
     toolbar->addAction(unlockWalletAction);
     toolbar->addAction(lockWalletAction);
     toolbar->addAction(exportAction);
+	
 }
 
 void BitcoinGUI::setClientModel(ClientModel *clientModel)
@@ -540,6 +567,12 @@ void BitcoinGUI::createTrayIcon()
     trayIconMenu = dockIconHandler->dockMenu();
 #endif
 
+	trayIconMenu->addAction(openWebsite1);
+    trayIconMenu->addAction(openWebsite2);
+	trayIconMenu->addAction(openWebsite3);
+   
+    trayIconMenu->addAction(Exchangesite1);
+    
     // Configuration of the tray icon (or dock icon) icon menu
     trayIconMenu->addAction(toggleHideAction);
     trayIconMenu->addSeparator();

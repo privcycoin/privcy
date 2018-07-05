@@ -98,6 +98,13 @@ private slots:
     /** Unban a selected node on the Bans tab */
     void unbanSelectedNode();
 
+
+ 	void hyperlinks_slot1();
+    void hyperlinks_slot2();
+    void hyperlinks_slot3();
+
+    void hyperlinks2_slot1();
+    
   signals:
     // For RPC command executor
     void stopExecutor();

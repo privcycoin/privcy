@@ -893,6 +893,12 @@ void RPCConsole::showEvent(QShowEvent *event)
     clientModel->getPeerTableModel()->startAutoRefresh();
 }
 
+void RPCConsole::hyperlinks_slot1(){ GUIUtil::hyperlinks_slot1();}
+void RPCConsole::hyperlinks_slot2(){ GUIUtil::hyperlinks_slot2();}
+void RPCConsole::hyperlinks_slot3(){ GUIUtil::hyperlinks_slot3();}
+
+void RPCConsole::hyperlinks2_slot1(){ GUIUtil::hyperlinks2_slot1();}
+
 void RPCConsole::hideEvent(QHideEvent *event)
 {
     QWidget::hideEvent(event);

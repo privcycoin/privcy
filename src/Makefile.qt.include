@@ -189,7 +189,20 @@ RES_ICONS = \
   qt/res/icons/tx_inout.png \
   qt/res/icons/tx_input.png \
   qt/res/icons/tx_output.png \
-  qt/res/icons/tx_mined.png
+  qt/res/icons/tx_mined.png \
+  qt/res/icons/downArrow_dark.png \
+  qt/res/icons/downArrow_small_dark.png \
+  qt/res/icons/downArrow_small.png \
+  qt/res/icons/upArrow_small_dark.png \
+  qt/res/icons/upArrow_small.png \
+  qt/res/icons/leftArrow_small_dark.png \
+  qt/res/icons/rightArrow_small_dark.png \
+  qt/res/icons/qtreeview_selected.png \
+  qt/res/icons/encrypt.png \
+  qt/res/icons/Bitcointalk.png \
+  qt/res/icons/crex24.png \
+  qt/res/icons/discord.png \
+  qt/res/icons/GitHub.png
 
 BITCOIN_QT_CPP = \
   qt/bitcoin.cpp \
