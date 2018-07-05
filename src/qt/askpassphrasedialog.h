@@ -39,6 +39,7 @@ private:
 
 private slots:
     void textChanged();
+    void toggleShowPassword(bool);
     bool event(QEvent *event);
     bool eventFilter(QObject *, QEvent *event);
 };
