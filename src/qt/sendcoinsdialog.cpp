@@ -467,7 +467,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString & text)
         else if (!CBitcoinAddress(text.toStdString()).IsValid())
         {
             ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:red;}");
-            ui->labelCoinControlChangeLabel->setText(tr("WARNING: Invalid PRiVCY address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid PRiVCY address"));
         }
         else
         {
@@ -484,7 +484,20 @@ void SendCoinsDialog::coinControlChangeEdited(const QString & text)
                 else
                 {
                     ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:red;}");
-                    ui->labelCoinControlChangeLabel->setText(tr("WARNING: unknown change address"));
+                    ui->labelCoinControlChangeLabel->setText(tr("Warning: Unknown change address"));
+                
+                // Confirmation dialog
+                QMessageBox::StandardButton btnRetVal = QMessageBox::question(this, tr("Confirm custom change address"), tr("The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?"),
+                    QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel);
+
+                if(btnRetVal == QMessageBox::Yes)
+                    CoinControlDialog::coinControl->destChange =  CBitcoinAddress(text.toStdString()).Get();
+                else
+                {
+                    ui->lineEditCoinControlChange->setText("");
+                    ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:black;}");
+                    ui->labelCoinControlChangeLabel->setText("");
+                }
                 }
             }
         }
