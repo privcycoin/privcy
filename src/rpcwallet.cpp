@@ -17,6 +17,8 @@ using namespace std;
 int64_t nWalletUnlockTime;
 static CCriticalSection cs_nWalletUnlockTime;
 
+CTxDestination changeAddress = CNoDestination();
+
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, json_spirit::Object& entry);
 
 //static void accountingDeprecationCheck()
@@ -2222,4 +2224,44 @@ Value getnettotals(const Array &params, bool fHelp)
     obj.push_back(Pair("totalbytessent", CNode::GetTotalBytesSent()));
     obj.push_back(Pair("timemillis", GetTimeMillis()));
     return obj;
+}
+
+Value setchangeaddress(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+            "setchangeaddress <PRiVCY Address>\n"
+            "Sets the change deposit address.");
+
+    if (params[0].get_str() == "")
+    {
+        changeAddress = CNoDestination();
+    }
+    else
+    {
+        CBitcoinAddress address(params[0].get_str());
+        if (!address.IsValid())
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PRiVCY address");
+        changeAddress = address.Get();
+    }
+
+    return Value::null;
+}
+
+
+Value getchangeaddress(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 0)
+        throw runtime_error(
+            "getchangeaddress\n"
+            "Returns the change deposit address.");
+
+    Value ret;
+
+    if (!CBitcoinAddress(changeAddress).IsValid())
+       ret = "";
+    else
+       ret = CBitcoinAddress(changeAddress).ToString();
+
+    return ret;
 }

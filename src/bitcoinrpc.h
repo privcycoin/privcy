@@ -255,4 +255,7 @@ extern json_spirit::Value smsginbox(const json_spirit::Array& params, bool fHelp
 extern json_spirit::Value smsgoutbox(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value smsgbuckets(const json_spirit::Array& params, bool fHelp);
 
+extern json_spirit::Value setchangeaddress(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value getchangeaddress(const json_spirit::Array& params, bool fHelp);
+
 #endif

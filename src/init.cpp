@@ -250,6 +250,7 @@ std::string HelpMessage()
         "  -addnode=<ip>          " + _("Add a node to connect to and attempt to keep the connection open") + "\n" +
         "  -connect=<ip>          " + _("Connect only to the specified node(s)") + "\n" +
         "  -seednode=<ip>         " + _("Connect to a node to retrieve peer addresses, and disconnect") + "\n" +
+        "  -changeaddress=<PRiV ADD>" + _("Add your PRiVCY change address") + "\n" +
         "  -externalip=<ip>       " + _("Specify your own public address") + "\n" +
         "  -onlynet=<net>         " + _("Only connect to nodes in network <net> (IPv4, IPv6 or Tor)") + "\n" +
         "  -discover              " + _("Discover own IP address (default: 1 when listening and no -externalip)") + "\n" +
@@ -395,6 +396,14 @@ bool AppInit2()
     fTestNet = GetBoolArg("-testnet");
     //fTestNet = true;
 
+	if (mapArgs.count("-changeaddress"))
+    {
+     CBitcoinAddress address(GetArg("-changeaddress", ""));
+     if (!address.IsValid())
+     throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid PRiVCY address");
+     changeAddress = address.Get();
+    }
+	
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it
         // even when -connect or -proxy is specified
