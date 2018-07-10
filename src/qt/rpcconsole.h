@@ -98,7 +98,14 @@ private slots:
     /** Unban a selected node on the Bans tab */
     void unbanSelectedNode();
 
-
+  	void showInfo();
+    /** Switch to console tab and show */
+    void showConsole();
+    /** Switch to network tab and show */
+    void showNetwork();
+    /** Switch to peers tab and show */
+    void showPeers();
+    
  	void hyperlinks_slot1();
     void hyperlinks_slot2();
     void hyperlinks_slot3();

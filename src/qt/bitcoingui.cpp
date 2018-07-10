@@ -260,6 +260,15 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
     connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
 	// Exchange
 	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
+	
+	// Jump directly to tabs in RPC-console
+    connect(openInfoAction, SIGNAL(triggered()), rpcConsole, SLOT(showInfo()));
+    connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole, SLOT(showConsole()));
+    connect(openPeersAction, SIGNAL(triggered()), rpcConsole, SLOT(showPeers()));
+    connect(openNetworkAction, SIGNAL(triggered()), rpcConsole, SLOT(showNetwork()));
+    connect(labelConnectionsIcon, SIGNAL(clicked()), rpcConsole, SLOT(showPeers()));
+
+
 
     
     gotoOverviewPage();
@@ -366,7 +375,16 @@ void BitcoinGUI::createActions()
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
+    
 
+    openInfoAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Information"), this);
+    openInfoAction->setStatusTip(tr("Show diagnostic information"));
+    openNetworkAction = new QAction(QIcon(":/icons/connect_4"), tr("&Network Monitor"), this);
+    openNetworkAction->setStatusTip(tr("Show network monitor"));
+    openPeersAction = new QAction(QIcon(":/icons/connect_4"), tr("&Peers list"), this);
+    openPeersAction->setStatusTip(tr("Show peers info"));
+
+    
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
@@ -419,7 +437,7 @@ void BitcoinGUI::createMenuBar()
     settings->addAction(unlockWalletAction);
     settings->addAction(lockWalletAction);
     settings->addSeparator();
-    settings->addAction(openConfEditorAction);   
+    settings->addAction(openRPCConsoleAction);
     settings->addAction(optionsAction);
 	
 	QMenu* hyperlinks = appMenuBar->addMenu(tr("&Links"));
@@ -431,6 +449,13 @@ void BitcoinGUI::createMenuBar()
     QMenu *hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
     hyperlinks2->addAction(Exchangesite1);
 
+	QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
+	tools->addAction(openInfoAction);
+	tools->addAction(openRPCConsoleAction);
+    tools->addAction(openNetworkAction);
+    tools->addAction(openPeersAction);
+    tools->addSeparator();
+    tools->addAction(openConfEditorAction);
         
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);

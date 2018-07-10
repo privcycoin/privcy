@@ -712,6 +712,32 @@ void RPCConsole::updateTrafficStats(quint64 totalBytesIn, quint64 totalBytesOut)
     ui->lblBytesOut->setText(FormatBytes(totalBytesOut));
 }
 
+
+void RPCConsole::showInfo()
+{
+    ui->tabWidget->setCurrentIndex(0);
+    show();
+}
+
+void RPCConsole::showConsole()
+{
+    ui->tabWidget->setCurrentIndex(1);
+    show();
+}
+
+void RPCConsole::showNetwork()
+{
+    ui->tabWidget->setCurrentIndex(2);
+    show();
+}
+
+void RPCConsole::showPeers()
+{
+    ui->tabWidget->setCurrentIndex(3);
+    show();
+}
+
+
 void RPCConsole::peerSelected(const QItemSelection &selected, const QItemSelection &deselected)
 {
     Q_UNUSED(deselected);

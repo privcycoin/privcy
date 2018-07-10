@@ -112,6 +112,10 @@ private:
     
     QAction* Exchangesite1;
 
+	QAction* openPeersAction;
+	QAction* openInfoAction;
+	QAction* openNetworkAction;
+
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
     TransactionView *transactionView;
