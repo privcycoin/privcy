@@ -437,7 +437,6 @@ void BitcoinGUI::createMenuBar()
     settings->addAction(unlockWalletAction);
     settings->addAction(lockWalletAction);
     settings->addSeparator();
-    settings->addAction(openRPCConsoleAction);
     settings->addAction(optionsAction);
 	
 	QMenu* hyperlinks = appMenuBar->addMenu(tr("&Links"));
