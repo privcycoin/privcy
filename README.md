@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://github.com/privcycoin/"><img src="http://privcy.io/privlogo.png" alt="Lotion" width="150"></a>
+	<a href="https://github.com/privcycoin/"><img src="https://i.imgur.com/l9UZqsO.png" alt="PRiVCY" width="600"></a>
       <BR>PRiVCY
 </h1>
 <h4 align="center">Own your Privacy!</h4>
@@ -33,11 +33,11 @@ Max. Coin Age | 30 Days
 
 ## Download
 
-[x] [Windows](http://www.github.com)
+[x] [Windows](https://github.com/privcycoin/privcy/releases/download/1.2.1.0/PRiVCY-qt.exe)
 
-[x] [MacOS](http://www.github.com)
+[x] [MacOS](https://github.com/privcycoin/privcy/releases/download/1.2.1.0/PRiVCY-Qt.dmg)
 
-[ ] [Linux App Img](http://www.github.com)
+[X] [Linux App Img](https://github.com/privcycoin/privcy/releases/download/1.2.1.0/PRiVCY_Wallet-x86_64.AppImage)
 
 
 - - - -
