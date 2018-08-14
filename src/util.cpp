@@ -1151,6 +1151,10 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 		fprintf(ConfFile, "port=17770\n");
 		fprintf(ConfFile, "addnode=otwsvate4vvogbrt.onion:17770\n");
 		fprintf(ConfFile, "addnode=nufiijzpo7ac2k6u.onion:17770\n");
+		fprintf(ConfFile, "addnode=7gke4nucgjy5sl66.onion:17770\n");
+		fprintf(ConfFile, "addnode=gl4b4dpo3z5k5aqo.onion:17770\n");
+		fprintf(ConfFile, "addnode=smc2dyyek26yjhpe.onion:17770\n");
+		fprintf(ConfFile, "addnode=5rbjxogffk4h3kfj.onion:17770\n");
 		fclose(ConfFile);
 	}
 	
