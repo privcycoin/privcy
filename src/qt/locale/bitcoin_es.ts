@@ -650,7 +650,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+59"/>
         <source>This transaction is over the size limit.  You can still send it for a fee of %1, which goes to the nodes that process your transaction and helps to support the network.  Do you want to pay the fee?</source>
-        <translation>La transacción supera el límite de tamaño. Sin embargo puedes enviarla por una tasa del 1%, la cual va a los nodos que gestionan tu transacción y ayuda a la red. ¿Quieres pagar esta tasa?</translation>
+        <translation>La transacción supera el límite de tamaño. Sin embargo puedes enviarla por una tasa del %1, la cual va a los nodos que gestionan tu transacción y ayuda a la red. ¿Quieres pagar esta tasa?</translation>
     </message>
     <message>
         <location line="+5"/>
