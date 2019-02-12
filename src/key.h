@@ -39,6 +39,13 @@
 // see www.keylength.com
 // script supports up to 75 for single byte push
 
+#if OPENSSL_VERSION_NUMBER >= 0x10100000L
+struct ECDSA_SIG_st {
+   BIGNUM *r;
+   BIGNUM *s;
+};
+#endif
+
 class key_error : public std::runtime_error
 {
 public:
