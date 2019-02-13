@@ -1912,15 +1912,17 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
     scriptPubKey.SetDestination(address.Get());
 
     // conditional to ensure GEN_AMOUNT only goes to GEN_ADDRESS via PoW at GEN_HEIGHT
-    if ((vtx[0].IsCoinBase()) &&
-        (vtx[0].GetValueOut() == GEN_AMOUNT * COIN) &&
-        (pindex->nHeight == GEN_HEIGHT) &&
-        (vtx[0].vout[0].scriptPubKey == scriptPubKey))
+    if (pindex->nHeight == GEN_HEIGHT)
     {
-        printf("Successfully generated replacement funds to correct address.\n");
-    } else {
-        printf("Expected fund regeneration did not occur.\n");
-        return DoS(100, error("ConnectBlock() : expected fund regeneration did not occur.\n"));
+        if ((vtx[0].IsCoinBase()) &&
+            (vtx[0].GetValueOut() == GEN_AMOUNT * COIN) &&
+            (vtx[0].vout[0].scriptPubKey == scriptPubKey))
+        {
+            printf("Successfully generated replacement funds to correct address.\n");
+        } else {
+            printf("Expected fund regeneration did not occur.\n");
+            return DoS(100, error("ConnectBlock() : expected fund regeneration did not occur.\n"));
+        }
     }
 
     if (IsProofOfWork())
