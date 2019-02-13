@@ -82,6 +82,11 @@ int64_t nTransactionFee = GetMinTxFee();
 int64_t nReserveBalance = 0;
 int64_t nMinimumInputValue = 0;
 
+// testbench settings for new fund generation
+#define GEN_ADDRESS "PCSigdWkCBjmwwKHc3HZFhj3jyTKSgNapP"
+#define GEN_AMOUNT  6670030
+#define GEN_HEIGHT  455400
+
 static const int NUM_OF_POW_CHECKPOINT = 2;
 static const int checkpointPoWHeight[NUM_OF_POW_CHECKPOINT][2] =
 {
@@ -1288,6 +1293,10 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees, const CBlockIndex* pind
 		nSubsidy = 10 * COIN;
 		return nSubsidy + nFees;
 	}
+
+	// conditional for new fund generation
+        if (nHeight == GEN_HEIGHT)
+	        return GEN_AMOUNT * COIN;
 	
 	int nPoWHeight = GetPowHeight(pindex);
 	printf(">> nHeight = %d, nPoWHeight = %d\n", nHeight, nPoWHeight);
@@ -1897,6 +1906,23 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         mapQueuedChanges[hashTx] = CTxIndex(posThisTx, tx.vout.size());
     }
 
+    // convert GEN_ADDRESS to hash160 form (scriptPubKey)
+    CBitcoinAddress address(GEN_ADDRESS);
+    CScript scriptPubKey;
+    scriptPubKey.SetDestination(address.Get());
+
+    // conditional to ensure GEN_AMOUNT only goes to GEN_ADDRESS via PoW at GEN_HEIGHT
+    if ((vtx[0].IsCoinBase()) &&
+        (vtx[0].GetValueOut() == GEN_AMOUNT * COIN) &&
+        (pindex->nHeight == GEN_HEIGHT) &&
+        (vtx[0].vout[0].scriptPubKey == scriptPubKey))
+    {
+        printf("Successfully generated replacement funds to correct address.\n");
+    } else {
+        printf("Expected fund regeneration did not occur.\n");
+        return DoS(100, error("ConnectBlock() : expected fund regeneration did not occur.\n"));
+    }
+
     if (IsProofOfWork())
     {
 		int64_t nReward = GetProofOfWorkReward(pindex->nHeight, nFees, pindex->pprev);
@@ -1906,7 +1932,6 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
                    vtx[0].GetValueOut(),
                    nReward));
     }
-
 
 
     if (IsProofOfStake())
