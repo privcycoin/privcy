@@ -1315,14 +1315,14 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, const CBlockIndex* pindex)
 	int nPoSHeight = GetPosHeight(pindex);
 	int64_t nSubsidy = 0;
 
-	if (nPoSHeight < YEARLY_POS_BLOCK_COUNT)
+	if (nPoSHeight < 2 * YEARLY_POS_BLOCK_COUNT)
 	{
 		nSubsidy = 10 * nRewardCoinYear * nCoinAge / 365;
 	}
-	else if (nPoSHeight < 2 * YEARLY_POS_BLOCK_COUNT)
-	{
-		nSubsidy = 7 * nRewardCoinYear * nCoinAge / 365;
-	}
+//	else if (nPoSHeight < 2 * YEARLY_POS_BLOCK_COUNT)
+//	{
+//		nSubsidy = 7 * nRewardCoinYear * nCoinAge / 365;
+//	}
 	else if (nPoSHeight < 3 * YEARLY_POS_BLOCK_COUNT)
 	{
 		nSubsidy = 5 * nRewardCoinYear * nCoinAge / 365;
