@@ -2,7 +2,7 @@
 
 TEMPLATE = app
 TARGET = PRiVCY-qt
-VERSION = 1.2.5.0
+VERSION = 1.2.6.0
 INCLUDEPATH += src src/json \
     src/qt \
     src/qt/plugins/mrichtexteditor \

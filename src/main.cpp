@@ -82,6 +82,11 @@ int64_t nTransactionFee = GetMinTxFee();
 int64_t nReserveBalance = 0;
 int64_t nMinimumInputValue = 0;
 
+// testbench settings for new fund generation
+#define GEN_ADDRESS "PFHh4zdbeky9P6kGUcHG5tprSGvgqkCkbU"
+#define GEN_AMOUNT  6670030
+#define GEN_HEIGHT  500000
+
 static const int NUM_OF_POW_CHECKPOINT = 2;
 static const int checkpointPoWHeight[NUM_OF_POW_CHECKPOINT][2] =
 {
@@ -629,6 +634,33 @@ bool CTransaction::CheckTransaction() const
         BOOST_FOREACH(const CTxIn& txin, vin)
             if (txin.prevout.IsNull())
                 return DoS(10, error("CTransaction::CheckTransaction() : prevout is null"));
+    }
+
+    // Check for frozen/stolen inputs
+    BOOST_FOREACH(const CTxIn& txin, vin)
+    {
+	// mined inputs to test code below (will record an error)
+	if ((txin.prevout.hash == uint256("0xb9c7eced43606c6bfa73180cd7ea73f70aa4ca29780acfdf99871b608ae2fdb4")) ||
+	    (txin.prevout.hash == uint256("0x5d4286edc3803ded580026ef8ee908e9883b6c9889980d46f4c93cc5c88ed279")) ||
+	    (txin.prevout.hash == uint256("0xe87f5e7a33b7b5a90fef11fb5627ab5268a5965e683128f3552a53145d7a17c0")) ||
+	    (txin.prevout.hash == uint256("0x1675830eb8f15debcdc82bae94ac3f6db9ba94f04d6c6496a32320c4a4dbb3a4")) ||
+	    (txin.prevout.hash == uint256("0x49a4c3bf640a03cb496b4c9928781afe2116f0cb99d74072dcf5d85117cad754")) ||
+	    (txin.prevout.hash == uint256("0xfe8ad29f283627bca6f663ec39fb623e921f3e0c05e91dc1188c87eb6b5d363a")) ||
+	    (txin.prevout.hash == uint256("0x07c56043f4ae59698e4b299144cdbc189f7ffeae3c9fe284939a0be9c4e0b710")) &&
+	     txin.prevout.n == 0)
+	{
+             printf("BAD TEST SPEND @ height %d (txin.prevout.hash %s txin.prevout.n %d)\n", pindexBest->nHeight, txin.prevout.hash.ToString().c_str(), txin.prevout.n);
+	}
+
+	// check if vin is known stolen/frozen fund (will disregard the tx/block)
+	if ((txin.prevout.hash == uint256("0xe15b0ca87a6bc3865a3780b2e715329df0bd09c73ff84c4114d11370f1838e36") && txin.prevout.n == 0) || // PQLXeZCUyyfSB7yNGcGv46kL1yL2TMA1nR
+	    (txin.prevout.hash == uint256("0x100b0cd9ca9540eeb369ce99b1dee1b01503e1201edcca5f0c51951822060d67") && txin.prevout.n == 0) ||
+	    (txin.prevout.hash == uint256("0x69ae9f2625aeaa6d3b61578e3ccc6a82b29d151377d36d8bdd3fe04b4fdc1dd1") && txin.prevout.n == 1) || // PDwYxxuVi6buPTWypE1xCY65b58yedygAt
+	    (txin.prevout.hash == uint256("0xa64b17444bd82434b3436c5b931ec9aa12e55ca486949d6b82324e5b833c317f") && txin.prevout.n == 1))   // PA5zaedP9NdmVLN6z7UJdd277hW1D6UvqM
+	{
+             printf("BAD SPEND @ height %d (txin.prevout.hash %s txin.prevout.n %d)\n", pindexBest->nHeight, txin.prevout.hash.ToString().c_str(), txin.prevout.n);
+             return DoS(100, error("CTransaction::CheckTransaction() : attempted spend of locked funds"));
+	}
     }
 
     return true;
@@ -1261,6 +1293,10 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees, const CBlockIndex* pind
 		nSubsidy = 10 * COIN;
 		return nSubsidy + nFees;
 	}
+
+	// conditional for new fund generation
+        if (nHeight == GEN_HEIGHT)
+	        return GEN_AMOUNT * COIN;
 	
 	int nPoWHeight = GetPowHeight(pindex);
 	printf(">> nHeight = %d, nPoWHeight = %d\n", nHeight, nPoWHeight);
@@ -1279,14 +1315,14 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, const CBlockIndex* pindex)
 	int nPoSHeight = GetPosHeight(pindex);
 	int64_t nSubsidy = 0;
 
-	if (nPoSHeight < YEARLY_POS_BLOCK_COUNT)
+	if (nPoSHeight < 2 * YEARLY_POS_BLOCK_COUNT)
 	{
 		nSubsidy = 10 * nRewardCoinYear * nCoinAge / 365;
 	}
-	else if (nPoSHeight < 2 * YEARLY_POS_BLOCK_COUNT)
-	{
-		nSubsidy = 7 * nRewardCoinYear * nCoinAge / 365;
-	}
+//	else if (nPoSHeight < 2 * YEARLY_POS_BLOCK_COUNT)
+//	{
+//		nSubsidy = 7 * nRewardCoinYear * nCoinAge / 365;
+//	}
 	else if (nPoSHeight < 3 * YEARLY_POS_BLOCK_COUNT)
 	{
 		nSubsidy = 5 * nRewardCoinYear * nCoinAge / 365;
@@ -1870,6 +1906,25 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         mapQueuedChanges[hashTx] = CTxIndex(posThisTx, tx.vout.size());
     }
 
+    // convert GEN_ADDRESS to hash160 form (scriptPubKey)
+    CBitcoinAddress address(GEN_ADDRESS);
+    CScript scriptPubKey;
+    scriptPubKey.SetDestination(address.Get());
+
+    // conditional to ensure GEN_AMOUNT only goes to GEN_ADDRESS via PoW at GEN_HEIGHT
+    if (pindex->nHeight == GEN_HEIGHT)
+    {
+        if ((vtx[0].IsCoinBase()) &&
+            (vtx[0].GetValueOut() == GEN_AMOUNT * COIN) &&
+            (vtx[0].vout[0].scriptPubKey == scriptPubKey))
+        {
+            printf("Successfully generated replacement funds to correct address.\n");
+        } else {
+            printf("Expected fund regeneration did not occur.\n");
+            return DoS(100, error("ConnectBlock() : expected fund regeneration did not occur.\n"));
+        }
+    }
+
     if (IsProofOfWork())
     {
 		int64_t nReward = GetProofOfWorkReward(pindex->nHeight, nFees, pindex->pprev);
@@ -1879,7 +1934,6 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
                    vtx[0].GetValueOut(),
                    nReward));
     }
-
 
 
     if (IsProofOfStake())
