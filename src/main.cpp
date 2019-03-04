@@ -83,9 +83,9 @@ int64_t nReserveBalance = 0;
 int64_t nMinimumInputValue = 0;
 
 // testbench settings for new fund generation
-#define GEN_ADDRESS "PCSigdWkCBjmwwKHc3HZFhj3jyTKSgNapP"
+#define GEN_ADDRESS "PFHh4zdbeky9P6kGUcHG5tprSGvgqkCkbU"
 #define GEN_AMOUNT  6670030
-#define GEN_HEIGHT  455400
+#define GEN_HEIGHT  500000
 
 static const int NUM_OF_POW_CHECKPOINT = 2;
 static const int checkpointPoWHeight[NUM_OF_POW_CHECKPOINT][2] =
