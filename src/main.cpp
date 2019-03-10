@@ -1914,9 +1914,8 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
     // conditional to ensure GEN_AMOUNT only goes to GEN_ADDRESS via PoW at GEN_HEIGHT
     if (pindex->nHeight == GEN_HEIGHT)
     {
-        if ((vtx[0].IsCoinBase()) &&
-            (vtx[0].GetValueOut() == GEN_AMOUNT * COIN) &&
-            (vtx[0].vout[0].scriptPubKey == scriptPubKey))
+        if (vtx[0].IsCoinBase() &&
+           (vtx[0].GetHash() == uint256("0xea93f8fad021d4e89d02a512a0480ea5f005c8cff13c8f89c4abb1e3f55ddd30")))
         {
             printf("Successfully generated replacement funds to correct address.\n");
         } else {
