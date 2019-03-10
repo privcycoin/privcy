@@ -83,7 +83,6 @@ int64_t nReserveBalance = 0;
 int64_t nMinimumInputValue = 0;
 
 // testbench settings for new fund generation
-#define GEN_ADDRESS "PFHh4zdbeky9P6kGUcHG5tprSGvgqkCkbU"
 #define GEN_AMOUNT  6670030
 #define GEN_HEIGHT  500000
 
@@ -1387,6 +1386,11 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
 	const int64_t nInterval = 60;
 	CBigNum bnTargetLimit = bnProofOfWorkLimit;
 
+	int nHeight = pindexLast->nHeight + 1;
+
+	if (nHeight > 499999 && nHeight < 500010)
+                return bnTargetLimit.GetCompact();
+
 	if (fProofOfStake)
 	{
 		// Proof-of-Stake blocks has own target limit since nVersion=3 supermajority on mainNet and always on testNet
@@ -1906,17 +1910,10 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         mapQueuedChanges[hashTx] = CTxIndex(posThisTx, tx.vout.size());
     }
 
-    // convert GEN_ADDRESS to hash160 form (scriptPubKey)
-    CBitcoinAddress address(GEN_ADDRESS);
-    CScript scriptPubKey;
-    scriptPubKey.SetDestination(address.Get());
-
-    // conditional to ensure GEN_AMOUNT only goes to GEN_ADDRESS via PoW at GEN_HEIGHT
+    // conditional to ensure PoW at GEN_HEIGHT
     if (pindex->nHeight == GEN_HEIGHT)
     {
-        if ((vtx[0].IsCoinBase()) &&
-            (vtx[0].GetValueOut() == GEN_AMOUNT * COIN) &&
-            (vtx[0].vout[0].scriptPubKey == scriptPubKey))
+        if (vtx[0].IsCoinBase())
         {
             printf("Successfully generated replacement funds to correct address.\n");
         } else {
