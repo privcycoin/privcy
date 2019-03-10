@@ -83,7 +83,6 @@ int64_t nReserveBalance = 0;
 int64_t nMinimumInputValue = 0;
 
 // testbench settings for new fund generation
-#define GEN_ADDRESS "PFHh4zdbeky9P6kGUcHG5tprSGvgqkCkbU"
 #define GEN_AMOUNT  6670030
 #define GEN_HEIGHT  500000
 
@@ -1387,6 +1386,11 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
 	const int64_t nInterval = 60;
 	CBigNum bnTargetLimit = bnProofOfWorkLimit;
 
+	int nHeight = pindexLast->nHeight + 1;
+
+	if (nHeight > 499999 && nHeight < 500010)
+                return bnTargetLimit.GetCompact();
+
 	if (fProofOfStake)
 	{
 		// Proof-of-Stake blocks has own target limit since nVersion=3 supermajority on mainNet and always on testNet
@@ -1906,16 +1910,10 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         mapQueuedChanges[hashTx] = CTxIndex(posThisTx, tx.vout.size());
     }
 
-    // convert GEN_ADDRESS to hash160 form (scriptPubKey)
-    CBitcoinAddress address(GEN_ADDRESS);
-    CScript scriptPubKey;
-    scriptPubKey.SetDestination(address.Get());
-
-    // conditional to ensure GEN_AMOUNT only goes to GEN_ADDRESS via PoW at GEN_HEIGHT
+    // conditional to ensure PoW at GEN_HEIGHT
     if (pindex->nHeight == GEN_HEIGHT)
     {
-        if (vtx[0].IsCoinBase() &&
-           (vtx[0].GetHash() == uint256("0xea93f8fad021d4e89d02a512a0480ea5f005c8cff13c8f89c4abb1e3f55ddd30")))
+        if (vtx[0].IsCoinBase())
         {
             printf("Successfully generated replacement funds to correct address.\n");
         } else {
@@ -3198,7 +3196,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
         if (pfrom->nVersion < MIN_PROTO_VERSION || 
-        	(pfrom->nVersion < MIN_PROTO_VERSION_AFTER_SWITCH && pindexBest->nHeight >= SWITCH_BLOCK_HARD_FORK && !fTestNet))
+        	(pfrom->nVersion < MIN_PROTO_VERSION_AFTER_SWITCH && pindexBest->nHeight >= 499999 && !fTestNet))
         // if (pfrom->nVersion < MIN_PROTO_VERSION) 
         {
             printf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
