@@ -19,7 +19,7 @@ HyBrid PoW / PoS Crypto-Currency
 * PoS	
 	* 60s block target
 	* 1st year = 10%
-	* 2nd year = 7%
+	* 2nd year = 10%
 	* 3rd year = 5%
 	* 4th +> = 1%
 
