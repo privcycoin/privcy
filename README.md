@@ -3,7 +3,7 @@
       <BR>PRiVCY
 </h1>
 <h4 align="center">Own your Privacy!</h4>
-
+<img src="https://travis-ci.com/Dev197/privcy.svg?branch=master">
 ### Specs
 
 HyBrid PoW / PoS Crypto-Currency
