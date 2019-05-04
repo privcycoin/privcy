@@ -9,7 +9,7 @@ cryptographic software written by Eric Young (eay@cryptsoft.com).
 Intro
 -----
 PrivcyCoin is a free open source project derived from Bitcoin, with
-the goal of providing a long-term energy-efficient scrypt-based crypto-currency.
-Built on the foundation of Bitcoin, PPCoin, NovaCoin and bitcoinplus innovations such as proof-of-stake
+the goal of providing a long-term energy-efficient X13-based crypto-currency.
+Built on the foundation of Bitcoin, PPCoin, NovaCoin and bitcoinplus, innovations such as proof-of-stake
 help further advance the field of crypto-currency.
 
