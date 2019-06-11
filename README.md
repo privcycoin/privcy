@@ -1,5 +1,5 @@
 <h1 align="center">
-	<a href="https://github.com/privcycoin/"><img src="https://i.imgur.com/l9UZqsO.png" alt="PRiVCY" width="600"></a>
+	<a href="https://github.com/privcycoin/"><img src="https://privcy.eu/assets/logo/PRiVCY_LOGO_2_green.png" alt="PRiVCY" width="600"></a>
       <BR>PRiVCY
 </h1>
 <h4 align="center">Own your Privacy!</h4>
