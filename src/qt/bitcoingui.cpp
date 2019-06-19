@@ -262,6 +262,10 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
     connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
 	// Exchange
 	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
+    connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot2()));
+    connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot3()));
+
+
 	
 	// Jump directly to tabs in RPC-console
     connect(openInfoAction, SIGNAL(triggered()), rpcConsole, SLOT(showInfo()));
@@ -406,7 +410,8 @@ void BitcoinGUI::createActions()
 
 
 	Exchangesite1 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
-    
+    Exchangesite2 = new QAction(QIcon(":/icons/coindeal"), tr("&Coindeal"), this);
+    Exchangesite3 = new QAction(QIcon(":/icons/altsmarkets"), tr("&Altsmarkets"), this);
 }
 
 void BitcoinGUI::changeStyleSheet()
@@ -449,6 +454,8 @@ void BitcoinGUI::createMenuBar()
 
     QMenu *hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
     hyperlinks2->addAction(Exchangesite1);
+    hyperlinks2->addAction(Exchangesite2);
+    hyperlinks2->addAction(Exchangesite3);
 
 	QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
 	tools->addAction(openInfoAction);
@@ -597,6 +604,8 @@ void BitcoinGUI::createTrayIcon()
 	trayIconMenu->addAction(openWebsite3);
    
     trayIconMenu->addAction(Exchangesite1);
+    trayIconMenu->addAction(Exchangesite2);
+    trayIconMenu->addAction(Exchangesite3);
      
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(sendCoinsAction);

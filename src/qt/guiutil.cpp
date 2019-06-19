@@ -388,6 +388,8 @@ void hyperlinks_slot2(){QString link= "https://bitcointalk.org/index.php?topic=4
 void hyperlinks_slot3(){QString link= "https://github.com/privcycoin/privcy";QDesktopServices::openUrl(QUrl(link));}
 //Exchanges
 void hyperlinks2_slot1(){QString link= "https://crex24.com/exchange/PRiV-BTC";QDesktopServices::openUrl(QUrl(link));}
+void hyperlinks2_slot2(){QString link= "https://frontend.coindeal.com/market/PRIV-BTC";QDesktopServices::openUrl(QUrl(link));}
+void hyperlinks2_slot3(){QString link= "https://altmarkets.io/trading/privbtc";QDesktopServices::openUrl(QUrl(link));}
 
 
 #ifdef WIN32
