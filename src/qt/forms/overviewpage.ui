@@ -294,7 +294,7 @@
         </size>
        </property>
       </spacer>
-     </item>    
+     </item>
     </layout>
    </item>
    <item>
@@ -357,9 +357,10 @@
         <item>
          <widget class="QListView" name="listTransactions">
           <property name="styleSheet">
-           <string notr="true">QListView { background: transparent; }
-color: rgb(255, 255, 255);
-QToolTip { color: black; }</string>
+           <string notr="true">QListView  { color: rgb(136, 138, 133); background: transparent; } 
+QToolTip { rgb(186, 189, 182); }
+
+</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
