@@ -41,7 +41,7 @@ color:#333;
 }
  
 QToolBar {
-background-color: qlineargradient(y1:0, y2: 1, stop: 0 #39af3a, stop: 0.75 #39af3a, stop: 0.99 #5cc25d, stop: 1 #5cc25d);
+background-color: qlineargradient(y1:0, y2: 1, stop: 0 #000000, stop: 0.75 #000000, stop: 0.99 #000000, stop: 1 #000000);
 border:0px solid #333;
 padding:1;
 margin:0;
@@ -50,7 +50,7 @@ width: 70px;
  
 QToolBar > QToolButton {
 Alignment: left;
-background-color: #39af3a;
+background-color: #000000;
 selection-background-color:transparent;
 border:0.5px solid #888;
 border-left: 0px;
@@ -65,23 +65,23 @@ height: 65px;
 }
  
 QToolBar > QToolButton:checked {
-background-color: qlineargradient(x1:0, x2: 1, stop: 0 #ffffff, stop: 0.07 #ffffff, stop: 0.0701 #39af3a, stop: 1 #39af3a);
+background-color: qlineargradient(x1:0, x2: 1, stop: 0 #ffffff, stop: 0.07 #ffffff, stop: 0.0701 #000000, stop: 1 #000000);
 color:#fff;
 }
  
 /* QToolBar > QToolButton:hover:!selected { */
 
 QToolBar > QToolButton:hover {
-background-color: qlineargradient(x1:0, x2: 1, stop: 0 #ffffff, stop: 0.07 #ffffff, stop: 0.0701 #39af3a, stop: 1 #39af3a);
+background-color: qlineargradient(x1:0, x2: 1, stop: 0 #ffffff, stop: 0.07 #ffffff, stop: 0.0701 #000000, stop: 1 #000000);
 color:#fff;
 }
  
 QToolBar > QToolButton#ToolbarSpacer:hover:!selected {
-background-color: #39af3a; 
+background-color: #000000; 
 }
  
 QToolBar > QToolButton:pressed {
-background-color: qlineargradient(x1:0, x2: 1, stop: 0 #ff8a00, stop: 0.07 #ff8a00, stop: 0.0701 #39af3a, stop: 1 #39af3a);
+background-color: qlineargradient(x1:0, x2: 1, stop: 0 #39af3a, stop: 0.07 #39af3a, stop: 0.0701 #000000, stop: 1 #000000);
 color:#fff;
 }
  
@@ -173,24 +173,24 @@ background-color:#f2f2f2;
 }
  
 .QValidatedLineEdit:!focus {
-color:#ff8a00;
+color:#000000;
 background-color:#f2f2f2;
 }
  
 .QLineEdit:!focus {
-color:#ff8a00;
+color:#000000;
 background-color:#f2f2f2;
 }
  
 .QTextEdit:!focus {
-color:#ff8a00;
+color:#000000;
 background-color:#f2f2f2;
 }
  
 /* .QValidatedLineEdit:checked, .QLineEdit:checked */
  
 .QValidatedLineEdit:disabled, .QLineEdit:disabled, .QTextEdit:disabled {
-color: #ff8a00;
+color: #000000;
 background-color:#f2f2f2;
 }
  
@@ -201,10 +201,10 @@ background-color:#f2f2f2;
 /***************************** Global Qt Objects ***********************************************************/
  
 QPushButton { /* Global Button Style */
-background-color: #67c768; 
+background-color: #a1a1a1; 
 border-width: 1px;
 border-style: outset;
-border-color: #39af3a;
+border-color: #a1a1a1;
 border-radius: 2px;
 color:#ffffff;
 font-size:12px;
@@ -218,7 +218,7 @@ margin: 2px;
 }
  
 QPushButton:hover {
-background-color: qlineargradient(y1:0, y2: 1, stop: 0 #ffffff, stop: 0.1 #ffffff, stop: 0.101 #39af3a, stop: 0.9 #39af3a, stop: 0.901 #ffffff, stop: 1 #ffffff);
+background-color: qlineargradient(y1:0, y2: 1, stop: 0 #ffffff, stop: 0.1 #ffffff, stop: 0.101 #a1a1a1, stop: 0.9 #a1a1a1, stop: 0.901 #ffffff, stop: 1 #ffffff);
 }
  
 QPushButton:focus {
