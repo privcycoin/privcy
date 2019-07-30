@@ -25,7 +25,7 @@ fi
 DISTDIR=privcy-1.2.6
 
 # Cross-compile for windows first (breaking the mingw/windows build is most common)
-cd /home/goof/lab/privcy-dev
+cd /home/reboot/nerdhome/privcy-dev
 make distdir
 mkdir -p win32-build
 rsync -av $DISTDIR/ win32-build/
@@ -40,7 +40,7 @@ fi
 make -j$JOBS
 
 # And compile for Linux:
-cd /home/goof/lab/privcy-dev
+cd /home/reboot/nerdhome/privcy-dev
 make distdir
 mkdir -p linux-build
 rsync -av $DISTDIR/ linux-build/
@@ -58,41 +58,41 @@ make -j$JOBS
 if [ -d "$OUT_DIR" -a -w "$OUT_DIR" ]; then
   set +e
   # Windows:
-  cp /home/goof/lab/privcy-dev/win32-build/src/bitcoind.exe $OUT_DIR/bitcoind.exe
-  cp /home/goof/lab/privcy-dev/win32-build/src/test/test_bitcoin.exe $OUT_DIR/test_bitcoin.exe
-  cp /home/goof/lab/privcy-dev/win32-build/src/qt/bitcoind-qt.exe $OUT_DIR/bitcoin-qt.exe
+  cp /home/reboot/nerdhome/privcy-dev/win32-build/src/bitcoind.exe $OUT_DIR/bitcoind.exe
+  cp /home/reboot/nerdhome/privcy-dev/win32-build/src/test/test_bitcoin.exe $OUT_DIR/test_bitcoin.exe
+  cp /home/reboot/nerdhome/privcy-dev/win32-build/src/qt/bitcoind-qt.exe $OUT_DIR/bitcoin-qt.exe
   # Linux:
-  cp /home/goof/lab/privcy-dev/linux-build/src/bitcoind $OUT_DIR/bitcoind
-  cp /home/goof/lab/privcy-dev/linux-build/src/test/test_bitcoin $OUT_DIR/test_bitcoin
-  cp /home/goof/lab/privcy-dev/linux-build/src/qt/bitcoind-qt $OUT_DIR/bitcoin-qt
+  cp /home/reboot/nerdhome/privcy-dev/linux-build/src/bitcoind $OUT_DIR/bitcoind
+  cp /home/reboot/nerdhome/privcy-dev/linux-build/src/test/test_bitcoin $OUT_DIR/test_bitcoin
+  cp /home/reboot/nerdhome/privcy-dev/linux-build/src/qt/bitcoind-qt $OUT_DIR/bitcoin-qt
   set -e
 fi
 
 # Run unit tests and blockchain-tester on Linux:
-cd /home/goof/lab/privcy-dev/linux-build
+cd /home/reboot/nerdhome/privcy-dev/linux-build
 make check
 
 # Run RPC integration test on Linux:
-/home/goof/lab/privcy-dev/qa/rpc-tests/wallet.sh /home/goof/lab/privcy-dev/linux-build/src
-/home/goof/lab/privcy-dev/qa/rpc-tests/listtransactions.py --srcdir /home/goof/lab/privcy-dev/linux-build/src
+/home/reboot/nerdhome/privcy-dev/qa/rpc-tests/wallet.sh /home/reboot/nerdhome/privcy-dev/linux-build/src
+/home/reboot/nerdhome/privcy-dev/qa/rpc-tests/listtransactions.py --srcdir /home/reboot/nerdhome/privcy-dev/linux-build/src
 # Clean up cache/ directory that the python regression tests create
 rm -rf cache
 
 if [ $RUN_EXPENSIVE_TESTS = 1 ]; then
   # Run unit tests and blockchain-tester on Windows:
-  cd /home/goof/lab/privcy-dev/win32-build
+  cd /home/reboot/nerdhome/privcy-dev/win32-build
   make check
 fi
 
 # Clean up builds (pull-tester machine doesn't have infinite disk space)
-cd /home/goof/lab/privcy-dev/linux-build
+cd /home/reboot/nerdhome/privcy-dev/linux-build
 make clean
-cd /home/goof/lab/privcy-dev/win32-build
+cd /home/reboot/nerdhome/privcy-dev/win32-build
 make clean
 
 # TODO: Fix code coverage builds on pull-tester machine
 # # Test code coverage
-# cd /home/goof/lab/privcy-dev
+# cd /home/reboot/nerdhome/privcy-dev
 # make distdir
 # mv $DISTDIR linux-coverage-build
 # cd linux-coverage-build
