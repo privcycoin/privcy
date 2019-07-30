@@ -411,7 +411,7 @@ void BitcoinGUI::createActions()
 
 	Exchangesite1 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
     Exchangesite2 = new QAction(QIcon(":/icons/coindeal"), tr("&Coindeal"), this);
-    Exchangesite3 = new QAction(QIcon(":/icons/altsmarkets"), tr("&Altsmarkets"), this);
+    Exchangesite3 = new QAction(QIcon(":/icons/altmarkets"), tr("&Altmarkets"), this);
 }
 
 void BitcoinGUI::changeStyleSheet()
