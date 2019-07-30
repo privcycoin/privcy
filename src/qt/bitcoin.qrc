@@ -62,6 +62,7 @@
         <file alias="discord">res/icons/discord.png</file>
         <file alias="GitHub">res/icons/GitHub.png</file>
         <file alias="altmarkets">res/icons/altmarkets.png</file>
+        <file alias="coindeal">res/icons/coindeal.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="about_new">res/images/about.png</file>
