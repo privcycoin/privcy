@@ -405,7 +405,7 @@ void BitcoinGUI::createActions()
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
     
     openWebsite1 = new QAction(QIcon(":/icons/discord"), tr("&Discord"), this);
-    openWebsite2 = new QAction(QIcon(":/icons/Bitcointalk"), tr("&Bitcointalk"), this);
+    openWebsite2 = new QAction(QIcon(":/icons/toolbar"), tr("&PRiVCY"), this);
     openWebsite3 = new QAction(QIcon(":/icons/GitHub"), tr("&Github"), this);
 
 
