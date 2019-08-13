@@ -227,13 +227,13 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
         progressBar->setStyleSheet("QProgressBar { background-color: #e8e8e8; border: 1px solid grey; border-radius: 3px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #FF8000, stop: 1 orange); border-radius: 3px; margin: 0px; }");
     }
 
-    progressBar->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
-    progressBarLabel->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
+    progressBar->setStyleSheet("color: white; background-color: #333333; border-color: #313c62;");
+    progressBarLabel->setStyleSheet("color: white; background-color: #333333; border-color: #313c62;");
 
     statusBar()->addWidget(progressBarLabel);
     statusBar()->addWidget(progressBar);
     statusBar()->addPermanentWidget(frameBlocks);
-    statusBar()->setStyleSheet("color: white; background-color: #7ba9ce; border-color: #313c62;");
+    statusBar()->setStyleSheet("color: white; background-color: #333333; border-color: #313c62;");
 
     syncIconMovie = new QMovie(":/movies/update_spinner", "mng", this);
 
@@ -262,6 +262,10 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) : QMainWindow(parent),
     connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
 	// Exchange
 	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
+    connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot2()));
+    connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot3()));
+
+
 	
 	// Jump directly to tabs in RPC-console
     connect(openInfoAction, SIGNAL(triggered()), rpcConsole, SLOT(showInfo()));
@@ -401,12 +405,13 @@ void BitcoinGUI::createActions()
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
     
     openWebsite1 = new QAction(QIcon(":/icons/discord"), tr("&Discord"), this);
-    openWebsite2 = new QAction(QIcon(":/icons/Bitcointalk"), tr("&Bitcointalk"), this);
+    openWebsite2 = new QAction(QIcon(":/icons/toolbar"), tr("&PRiVCY"), this);
     openWebsite3 = new QAction(QIcon(":/icons/GitHub"), tr("&Github"), this);
 
 
 	Exchangesite1 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
-    
+    Exchangesite2 = new QAction(QIcon(":/icons/coindeal"), tr("&Coindeal"), this);
+    Exchangesite3 = new QAction(QIcon(":/icons/altmarkets"), tr("&Altmarkets"), this);
 }
 
 void BitcoinGUI::changeStyleSheet()
@@ -449,6 +454,8 @@ void BitcoinGUI::createMenuBar()
 
     QMenu *hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
     hyperlinks2->addAction(Exchangesite1);
+    hyperlinks2->addAction(Exchangesite2);
+    hyperlinks2->addAction(Exchangesite3);
 
 	QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
 	tools->addAction(openInfoAction);
@@ -597,6 +604,8 @@ void BitcoinGUI::createTrayIcon()
 	trayIconMenu->addAction(openWebsite3);
    
     trayIconMenu->addAction(Exchangesite1);
+    trayIconMenu->addAction(Exchangesite2);
+    trayIconMenu->addAction(Exchangesite3);
      
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(sendCoinsAction);

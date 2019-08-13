@@ -924,6 +924,8 @@ void RPCConsole::hyperlinks_slot2(){ GUIUtil::hyperlinks_slot2();}
 void RPCConsole::hyperlinks_slot3(){ GUIUtil::hyperlinks_slot3();}
 
 void RPCConsole::hyperlinks2_slot1(){ GUIUtil::hyperlinks2_slot1();}
+void RPCConsole::hyperlinks2_slot2(){ GUIUtil::hyperlinks2_slot2();}
+void RPCConsole::hyperlinks2_slot3(){ GUIUtil::hyperlinks2_slot3();}
 
 void RPCConsole::hideEvent(QHideEvent *event)
 {
