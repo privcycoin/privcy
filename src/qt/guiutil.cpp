@@ -158,7 +158,7 @@ QString loadStyleSheet()
     QSettings settings;
 
     QString cssName = QString(":/css/default");
-    if (GetBoolArg("-dark"))
+    if (settings.value("bDarkThemeEnabled") == true)
        cssName = QString(":/css/dark");
     else
        cssName = QString(":/css/light");
