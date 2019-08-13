@@ -73,6 +73,8 @@
     </qresource>
     <qresource prefix="/css">
         <file alias="default">res/css/default.css</file>
+        <file alias="dark">res/css/dark.css</file>
+        <file alias="light">res/css/light.css</file>
     </qresource>
     <qresource prefix="/movies">
         <file alias="update_spinner">res/movies/update_spinner.mng</file>

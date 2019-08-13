@@ -156,7 +156,12 @@ QString loadStyleSheet()
 {
     QString styleSheet;
     QSettings settings;
+
     QString cssName = QString(":/css/default");
+    if (GetBoolArg("-dark"))
+       cssName = QString(":/css/dark");
+    else
+       cssName = QString(":/css/light");
 
     QFile qFile(cssName);
     if (qFile.open(QFile::ReadOnly))
