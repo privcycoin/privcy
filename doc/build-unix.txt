@@ -32,7 +32,7 @@ then get PrivcyCoin source from the github:
     git clone --recursive https://github.com/privcycoin/privcy.git
 
 build with autotools:
-    cd PrivcyCoin
+    cd privcy
     ./autogen.sh
     ./configure --with-gui=qt5    (if you want to build daemon, use --without-gui)
     make
