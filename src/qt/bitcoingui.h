@@ -111,6 +111,8 @@ private:
     QAction* openWebsite3;
     
     QAction* Exchangesite1;
+    QAction* Exchangesite2;
+    QAction* Exchangesite3;
 
 	QAction* openPeersAction;
 	QAction* openInfoAction;

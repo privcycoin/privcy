@@ -156,7 +156,12 @@ QString loadStyleSheet()
 {
     QString styleSheet;
     QSettings settings;
+
     QString cssName = QString(":/css/default");
+    if (settings.value("bDarkThemeEnabled") == true)
+       cssName = QString(":/css/dark");
+    else
+       cssName = QString(":/css/light");
 
     QFile qFile(cssName);
     if (qFile.open(QFile::ReadOnly))
@@ -383,11 +388,13 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
     return QObject::eventFilter(obj, evt);
 }
 
-void hyperlinks_slot1(){QString link= "https://discord.gg/yxWBGEX";QDesktopServices::openUrl(QUrl(link));}
-void hyperlinks_slot2(){QString link= "https://bitcointalk.org/index.php?topic=4503790.0";QDesktopServices::openUrl(QUrl(link));}
+void hyperlinks_slot1(){QString link= "https://discord.gg/b4mWcTm";QDesktopServices::openUrl(QUrl(link));}
+void hyperlinks_slot2(){QString link= "https://privcy.eu/";QDesktopServices::openUrl(QUrl(link));}
 void hyperlinks_slot3(){QString link= "https://github.com/privcycoin/privcy";QDesktopServices::openUrl(QUrl(link));}
 //Exchanges
 void hyperlinks2_slot1(){QString link= "https://crex24.com/exchange/PRiV-BTC";QDesktopServices::openUrl(QUrl(link));}
+void hyperlinks2_slot2(){QString link= "https://frontend.coindeal.com/market/PRIV-BTC";QDesktopServices::openUrl(QUrl(link));}
+void hyperlinks2_slot3(){QString link= "https://altmarkets.io/trading/privbtc";QDesktopServices::openUrl(QUrl(link));}
 
 
 #ifdef WIN32

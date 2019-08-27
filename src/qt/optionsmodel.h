@@ -29,6 +29,7 @@ public:
         ReserveBalance,    // qint64
         DisplayUnit,       // BitcoinUnits::Unit
         DisplayAddresses,  // bool
+        DarkThemeEnabled, //bool
         DetachDatabases,   // bool
         Language,          // QString
         CoinControlFeatures, // bool
@@ -52,6 +53,7 @@ public:
     bool getMinimizeOnClose();
     int getDisplayUnit();
     bool getDisplayAddresses();
+    bool getDarkThemeEnabled();
     bool getCoinControlFeatures();
     bool getPrintDebugLog();
     QString getLanguage() { return language; }
@@ -59,6 +61,7 @@ public:
 private:
     int nDisplayUnit;
     bool bDisplayAddresses;
+    bool bDarkThemeEnabled;
     bool fMinimizeToTray;
     bool fMinimizeOnClose;
     bool fCoinControlFeatures;

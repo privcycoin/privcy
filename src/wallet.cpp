@@ -19,7 +19,7 @@ using namespace std;
 extern unsigned int nStakeMaxAge;
 
 unsigned int nStakeSplitAge = 20 * 24 * 60 * 60;
-int64_t nStakeCombineThreshold = 100 * COIN;
+int64_t nStakeCombineThreshold = 100000 * COIN;
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -1697,11 +1697,13 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     if (setCoins.empty())
         return false;
 
+    static int nMaxStakeSearchInterval = 60;
     int64_t nCredit = 0;
     CScript scriptPubKeyKernel;
     CTxDB txdb("r");
     BOOST_FOREACH(PAIRTYPE(const CWalletTx*, unsigned int) pcoin, setCoins)
     {
+        CBlock block;
         CTxIndex txindex;
         {
             LOCK2(cs_main, cs_wallet);
@@ -1709,15 +1711,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 continue;
         }
 
-        // Read block header
-        CBlock block;
-        {
-            LOCK2(cs_main, cs_wallet);
-            if (!block.ReadFromDisk(txindex.pos.nFile, txindex.pos.nBlockPos, false))
-                continue;
-        }
+        if (!block.ReadFromDisk(txindex.pos.nFile, txindex.pos.nBlockPos, false))
+            continue;
 
-        static int nMaxStakeSearchInterval = 60;
         if (block.GetBlockTime() + nStakeMinAge > txNew.nTime - nMaxStakeSearchInterval)
             continue; // only count coins meeting min age requirement
 

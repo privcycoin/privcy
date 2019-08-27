@@ -1,4 +1,4 @@
-<!DOCTYPE RCC><RCC version="1.0">
+<RCC>
     <qresource prefix="/icons">
         <file alias="address-book">res/icons/address-book.png</file>
         <file alias="quit">res/icons/quit.png</file>
@@ -58,9 +58,11 @@
         <file alias="qtreeview_selected">res/icons/qtreeview_selected.png</file>
         <file alias="encrypt">res/icons/encrypt.png</file>
         <file alias="Bitcointalk">res/icons/Bitcointalk.png</file>
-		<file alias="crex24">res/icons/crex24.png</file>
-		<file alias="discord">res/icons/discord.png</file>
-		<file alias="GitHub">res/icons/GitHub.png</file>        
+        <file alias="crex24">res/icons/crex24.png</file>
+        <file alias="discord">res/icons/discord.png</file>
+        <file alias="GitHub">res/icons/GitHub.png</file>
+        <file alias="altmarkets">res/icons/altmarkets.png</file>
+        <file alias="coindeal">res/icons/coindeal.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="about_new">res/images/about.png</file>
@@ -69,8 +71,10 @@
         <file alias="splash_testnet">res/images/splash_testnet.png</file>
         <file alias="wallet_logo">res/images/wallet.png</file>
     </qresource>
-     <qresource prefix="/css">
+    <qresource prefix="/css">
         <file alias="default">res/css/default.css</file>
+        <file alias="dark">res/css/dark.css</file>
+        <file alias="light">res/css/light.css</file>
     </qresource>
     <qresource prefix="/movies">
         <file alias="update_spinner">res/movies/update_spinner.mng</file>

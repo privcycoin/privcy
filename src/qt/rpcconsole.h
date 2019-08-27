@@ -111,7 +111,9 @@ private slots:
     void hyperlinks_slot3();
 
     void hyperlinks2_slot1();
-    
+    void hyperlinks2_slot2();
+    void hyperlinks2_slot3();
+
   signals:
     // For RPC command executor
     void stopExecutor();
