@@ -43,6 +43,7 @@ void OptionsModel::Init()
     // These are Qt-only settings:
     nDisplayUnit = settings.value("nDisplayUnit", BitcoinUnits::BTC).toInt();
     bDisplayAddresses = settings.value("bDisplayAddresses", false).toBool();
+    bDarkThemeEnabled = settings.value("bDarkThemeEnabled", false).toBool();
     fMinimizeToTray = settings.value("fMinimizeToTray", false).toBool();
     fMinimizeOnClose = settings.value("fMinimizeOnClose", false).toBool();
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
@@ -89,7 +90,7 @@ bool OptionsModel::Upgrade()
         }
     }
     QList<QString> boolOptions;
-    boolOptions << "bDisplayAddresses" << "fMinimizeToTray" << "fMinimizeOnClose" << "fUseProxy" << "fUseUPnP";
+    boolOptions << "bDarkThemeEnabled " << "bDisplayAddresses" << "fMinimizeToTray" << "fMinimizeOnClose" << "fUseProxy" << "fUseUPnP";
     foreach(QString key, boolOptions)
     {
         bool value = false;
@@ -169,6 +170,8 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return QVariant((qint64) nReserveBalance);
         case DisplayUnit:
             return QVariant(nDisplayUnit);
+        case DarkThemeEnabled:
+            return QVariant(bDarkThemeEnabled);
         case DisplayAddresses:
             return QVariant(bDisplayAddresses);
         case DetachDatabases:
@@ -260,6 +263,10 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("nDisplayUnit", nDisplayUnit);
             emit displayUnitChanged(nDisplayUnit);
             break;
+        case DarkThemeEnabled:
+            bDarkThemeEnabled = value.toBool();
+            settings.setValue("bDarkThemeEnabled", bDarkThemeEnabled);
+            break;
         case DisplayAddresses:
             bDisplayAddresses = value.toBool();
             settings.setValue("bDisplayAddresses", bDisplayAddresses);
@@ -321,6 +328,11 @@ bool OptionsModel::getMinimizeOnClose()
 int OptionsModel::getDisplayUnit()
 {
     return nDisplayUnit;
+}
+
+bool OptionsModel::getDarkThemeEnabled()
+{
+   return bDarkThemeEnabled;
 }
 
 bool OptionsModel::getDisplayAddresses()

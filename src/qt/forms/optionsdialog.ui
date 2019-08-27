@@ -26,7 +26,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabMain">
       <attribute name="title">
@@ -172,6 +172,16 @@
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="darkThemeEnabled">
+         <property name="toolTip">
+          <string>Enable dark theme after restart</string>
+         </property>
+         <property name="text">
+          <string>Enable dark theme</string>
          </property>
         </widget>
        </item>
@@ -419,13 +429,6 @@
         </widget>
        </item>
        <item row="5" column="0">
-        <widget class="QCheckBox" name="useBlackTheme">
-         <property name="text">
-          <string>Use black visual theme (requires restart)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
         <spacer name="verticalSpacer_Display">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
