@@ -52,7 +52,5 @@ Our team feels that this should be openly disclosed as not many out there are wi
 
 Please be patient as we work torwards building the privacy crypto-market, this is just the beginning.  
 
-BE AWARE! This repository is maintained by Nerdlabs001.com. We are code support only. We are in NO WAY affiliated with the social side of this or any project in the Org. We are code only and should only be contacted regarding technical support. We DO not WILL not participate and are in NO way responsible for what this team and its community does or does not do with the project. It should also be noted as this is a work repo it may not reflect current code and should not be used for production. Please see the projects info page for official links repos ect.. If you use this source you may risk losing all your coins in an unrecoverable way
-
  
 
