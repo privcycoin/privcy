@@ -44,13 +44,13 @@ Max. Coin Age | 30 Days
 Wallet GUI is undergoing major reconstruction.
 
 
-Disclaimer: As we work towards fortifying security, anonymity, and privacy all throughout the Crypto-currency market. Unlike many others in the market we are aware of the real world scenarios, claiming anything with 100% certaintiy is simply not true. 
+Disclaimer: As we work towards fortifying security, anonymity, and privacy throughout the Crypto-currency market, unlike many others in the market we are aware of the real world scenarios, and to claim anything with 100% certaintiy is simply not honest. 
 
-We have to come to the realizations that there will exploits in software and/or hardware and the best anyone can do is adapt, overcome and stride towards building the best product out there.
+We have to come to the realizations that there will be exploits in software and/or hardware and the best anyone can do is adapt, overcome and stride towards building the best product out there.
 
 Our team feels that this should be openly disclosed as not many out there are willing to do so.
 
-Please be patient as we work torwards building the privacy crypto-market, this is just the beginning.  
+Please be patient as we work torwards building the PRiVCY crypto-market, this is just the beginning.  
 
  
 
